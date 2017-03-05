@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package common;
+
+//Request request object
+message Request {
+    //Path request path
+    string path = 1;
+    //Method request method
+    string method = 2;
+    //Headers request header
+    map<string,string> headers = 3;
+    //Payload request payload
+    bytes payload = 4; 
+    //Timestamp time stamp 
+    uint64 timestamp = 5;
+}
+
+//Response response object
+message Response {
+    //Code response code
+    int32 code = 1;
+    //Headers response headers
+    map<string,string> headers = 2;
+    //Payload response payload
+    bytes payload = 3;
+    //Error error message
+    string error = 4;
+    //Time elapsed time
+    uint64 time = 5;
+}
+
+//GenericService generic service
+service GenericService {
+    //Get get resource
+    rpc Get(Request) returns (Response) {}
+    //Post create resource
+    rpc Post(Request) returns (Response) {}
+    //Put modify resource
+    rpc Put(Request) returns (Response) {}
+    //Delete delete resource
+    rpc Delete(Request) returns (Response) {}
+    //Head check resource
+    rpc Head(Request) returns (Response) {}
+    //Options get resource option
+    rpc Options(Request) returns (Response){}
+}
